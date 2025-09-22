@@ -7,6 +7,12 @@ export const ticketService = {
     return response.data;
   },
 
+  // Khusus untuk dashboard - mengambil tickets dengan limit dan sorting
+  getTicketsForDashboard: async (limit = 5) => {
+    const response = await api.get(`/tickets?limit=${limit}`);
+    return response.data;
+  },
+
   getTicket: async (code) => {
     const response = await api.get(`/tickets/${code}`);
     return response.data;
