@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 
 const Statistics = () => {
   const { user } = useAuth();
-  const [statistics, setStatistics] = useState(null);
+  const [statistics, setStatistics] = useState([]);
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -66,6 +66,11 @@ const Statistics = () => {
       </div>
     );
   }
+
+  const handleTicketDelete = (deletedTicketCode) => {
+  setTickets(prevTickets => prevTickets.filter(ticket => ticket.code !== deletedTicketCode));
+};
+
 
   // Admin Dashboard
   if (user?.role === 'admin') {
@@ -153,6 +158,8 @@ const Statistics = () => {
         title="Tiket Anda" 
         showAll={true}
         isAdmin={false}
+        onDelete={handleTicketDelete}
+        currentUser={user} // Pass current user to determine delete permissions
       />
     </div>
   );
